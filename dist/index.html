@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="main.bundle.js"></script></head>
+<body class='bg'>
+    <section class='main'>
+        <section class='try' id='try'>
+            <header  id="start">
+                <div class="wrapper">
+                    <ul class="nav">
+                        <li></li>
+                        <li><a href="#try">Главная</a></li>
+                        <li><a href="#clients">Клиенты</a></li>
+                        <li><a href="#todo-list">Список задач</a></li>
+                        <li><a href="#">Выход</a></li>
+                    </ul>
+                </div>
+            </header>
+            <div class="wrapper">
+                <article class="start" >
+                    <time id='time'></time> 
+                    <span id='date'></span>   
+                    <h1>
+                        <span id='greeting'></span>
+                        <span id='name'></span>
+                    </h1>
+                    <h2>Главная задача на сегодня</h2>
+                    <h2 id='focus' contenteditable="true">...</h2>
+                </article>
+            </div>
+        </section>
+        <main>
+            <div class="wrapper">
+                <article class="clients" id='clients'>
+                    <h2>Клиенты</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Компания</th>
+                                    <th>Email</th>
+                                    <th>Телефон</th>
+                                    <th>Баланс</th>
+                                    <th>Дата регистрации</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>                           
+                        </table>
+                    </div>  
+                </article>
+                <article id='todo-list'>
+                    <h2>Список задач</h2>
+                    <form class='list'>
+                        <input type="text" class='list-text' placeholder="введите задачу" maxlength="40">
+                        <button class='list-add'><span></span></button>
+                    </form>
+                    <div class="checkBtns">
+                        <div class="checkBtns-item">
+                            <input type="radio" id='first' name="check-list" value="all" checked><label for='first'>все</label>
+                        </div>
+                        <div class="checkBtns-item">
+                            <input type="radio" id='second' name="check-list" value="completed"><label for='second'>выполненные</label>
+                        </div>
+                        <div class="checkBtns-item"> 
+                            <input type="radio" id='third' name="check-list" value="uncompleted"><label for='third'>невыполненные</label>  
+                        </div>                                         
+                    </div>
+                    <div class="todo-container">
+                        <ul class="todo-list"></ul>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </section>
+    <section class="modal-window modal">
+            <h3>Удалить запись о клиенте?</h3>
+            <button>Удалить</button>
+            <button>Отмена</button>
+    </section>
+
+    <section class='modal-window-perfect modal'> 
+        <span class="close"></span>
+        <h3>Данные о клиенте удалены</h3>
+    </section>
+<
+    <form name="login" class="login" onsubmit="return false">
+        <input type="radio" name="inset" id="sign-in" checked>
+        <label for="sign-in" class="first">Вход</label>
+
+        <input type="radio" name="inset" id="sign-up">
+        <label for="sign-up" class="second">Регистрация</label>
+
+        <article class="sign_in">
+            <input type="email" placeholder="E-mail" required>
+            <input type="password" placeholder="Пароль" required>
+            <input type="submit" value='Войти'>
+        </article>
+
+        <article class="sign_up">
+            <input type="email" placeholder="E-mail">
+            <input type="password" placeholder="Пароль">
+            <input type="password" placeholder="Повторите пароль">
+            <input type="submit" value='Регистрация'>
+        </article> 
+    </form> 
+       
+</body>
+</html>
