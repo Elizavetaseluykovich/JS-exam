@@ -5,6 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        let map;
+        function initMap() {
+            let map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 53.902496, lng: 27.561481 },
+                zoom: 3,
+            });
+
+            let promise =  fetch('https://gist.githubusercontent.com/oDASCo/3f4014d24dc79e1e29b58bfa96afaa1b/raw/677516ee3bd278f7e3d805108596ca431d00b629/db.json');
+
+            promise.then(response => {
+                let jObj = response.json();
+                return Promise.resolve(jObj);
+            }).then((jObj) => {
+                readLocation(jObj);
+            })
+
+            function readLocation (obj) {
+                obj.forEach((element, i) => {
+                addMarker({
+                    coords: {lat: element['latitude'], lng: element['longitude']},
+                    iconImg: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                    content: `<div class="info-window">${element['name']}</div>`
+                });
+            })
+
+            function addMarker(props) {
+                var marker = new google.maps.Marker({
+                    position: props.coords,
+                    map: map,
+                });
+        
+                if (props.iconImg) {
+                    marker.setIcon(props.iconImg);
+                }
+        
+                if (props.content) {
+                    let infoWindow = new google.maps.InfoWindow({
+                        content: props.content
+                    })
+        
+                    marker.addListener('click', function() {
+                        infoWindow.open(map, marker);
+                    });
+                }
+             }
+        }
+    }      
+    </script>
 <script defer src="main.bundle.js"></script></head>
 <body class='bg'>
     <section class='main'>
@@ -12,10 +61,10 @@
             <header  id="start">
                 <div class="wrapper">
                     <ul class="nav">
-                        <li></li>
                         <li><a href="#try">Главная</a></li>
                         <li><a href="#clients">Клиенты</a></li>
                         <li><a href="#todo-list">Список задач</a></li>
+                        <li><a href="#map">Карта</a></li>
                         <li><a href="#">Выход</a></li>
                     </ul>
                 </div>
@@ -30,6 +79,7 @@
                     </h1>
                     <h2>Главная задача на сегодня</h2>
                     <h2 id='focus' contenteditable="true">...</h2>
+                    <p class="platform"></p>
                 </article>
             </div>
         </section>
@@ -74,6 +124,10 @@
                         <ul class="todo-list"></ul>
                     </div>
                 </article>
+                <article class="map">
+                    <h2>Карта</h2>
+                    <div id="map"></div>
+                </article>
             </div>
         </main>
     </section>
@@ -83,11 +137,17 @@
             <button>Отмена</button>
     </section>
 
+    <section class="modal-window modal-window-exit modal">
+        <h3>Вы действительно хотите выйти?</h3>
+        <button>Выход</button>
+        <button>Отмена</button>
+</section>
+
     <section class='modal-window-perfect modal'> 
         <span class="close"></span>
         <h3>Данные о клиенте удалены</h3>
     </section>
-<
+
     <form name="login" class="login" onsubmit="return false">
         <input type="radio" name="inset" id="sign-in" checked>
         <label for="sign-in" class="first">Вход</label>
@@ -108,6 +168,7 @@
             <input type="submit" value='Регистрация'>
         </article> 
     </form> 
-       
+
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6tLIyjAfwM8gVJjOGyiuqK6HF54fT-Ow&callback=initMap&libraries=&v=weekly"></script>
 </body>
 </html>
